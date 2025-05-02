@@ -6,7 +6,7 @@ import ProjectNotfound from '../components/ProjectNotfound'
 import WorkByProjectid from '../components/WorkComponents/WorkByProjectid'
 import { LoaderCircle } from 'lucide-react'
 
-export default function page() {
+const PageContent = () =>  {
 
 
      const params = useSearchParams()
@@ -47,3 +47,18 @@ export default function page() {
      </>
   )
 }
+
+
+
+
+export default function page() {
+  return (
+   <Suspense fallback={
+      <div className="loaderframe  h-[200px] flex items-center justify-center "><div className='flex loader items-center h-[60px] justify-center '><LoaderCircle size={60} ></LoaderCircle></div></div>
+        }>
+
+          <PageContent></PageContent>
+</Suspense>
+  )
+}
+
