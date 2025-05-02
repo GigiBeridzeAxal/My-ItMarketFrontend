@@ -189,7 +189,6 @@ return <div className='flex mt-[15px] items-start gap-[15px]' key={id}>
 }
 
 
-import React from 'react'
 
 export default function WorkByProjectid() {
   return (<Suspense fallback={
