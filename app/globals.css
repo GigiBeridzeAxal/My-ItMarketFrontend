@@ -1,3 +1,6 @@
+*{
+  letter-spacing: 0px;
+}
 @import "tailwindcss";
 
 :root {
@@ -19,8 +22,63 @@
   }
 }
 
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+.activatednavsetting{
+  border-bottom: 1px solid black;
+}
+.tager{
+  width: fit-content;
+}
+.banner{
+  width: 100%;
+  height: 350px;
+}
+.mainpost{
+  width: 100%;
+  height: 100%;
+
+  justify-content: center;
+  align-items: center;
+}
+.tager{
+
+  box-shadow: 1px 1px 1px 1px rgb(182, 182, 182);
+
+}
+.projectdesc{
+  word-break: break-all;
+}
+
+.activated{
+  padding: 5px;
+  border-bottom: 1px solid black;
+}
+
+.messanger{
+  height: calc(100vh -90px);
+}
+
+.loader{
+
+
+  animation: linear Loader 2s infinite;
+
+
+}
+@keyframes Loader {
+
+
+  0%{
+    transform: rotate(0deg);
+  }
+
+  100%{
+    transform: rotate(360deg);
+  }
+  
 }

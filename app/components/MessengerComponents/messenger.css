@@ -1,0 +1,7 @@
+
+.messageslist{
+    overflow-y: auto;
+    max-height: 95%;
+    min-height: 95%;
+  }
+
