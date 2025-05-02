@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import useAuth from '../store/useAuth'
 import Header from '../components/Header'
 import { useSearchParams } from 'next/navigation'
-import { Edit, Star } from 'lucide-react'
+import { Edit, LoaderCircle, Star } from 'lucide-react'
 
 export default function page() {
 
@@ -47,6 +47,10 @@ export default function page() {
   return (
 
      <>
+
+     <Suspense fallback={
+         <div className="loaderframe  h-[200px] flex items-center justify-center "><div className='flex loader items-center h-[60px] justify-center '><LoaderCircle size={60} ></LoaderCircle></div></div>
+           }>
     
        <div className="main w-[100%] flex justify-center ">
         <div className="mainframe w-[80%]">
@@ -94,6 +98,7 @@ export default function page() {
         </div>
     
        </div>
+       </Suspense>
       </>
    
   )

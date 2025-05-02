@@ -2,12 +2,12 @@
 import { useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import useProjects from '../../store/useProjects'
-import { CreditCard, DollarSign, IdCard, Mail, Star, Timer } from 'lucide-react'
+import { CreditCard, DollarSign, IdCard, LoaderCircle, Mail, Star, Timer } from 'lucide-react'
 import useAuth from '../../store/useAuth'
 import Link from 'next/link'
 
 
-export default function WorkByProjectid() {
+const WorkByProjectidcontent = () => {
 
     const path = useSearchParams()
 
@@ -186,4 +186,16 @@ return <div className='flex mt-[15px] items-start gap-[15px]' key={id}>
       </div>
     </div>
   )
+}
+
+
+import React from 'react'
+
+export default function WorkByProjectid() {
+  return (<Suspense fallback={
+    <div className="loaderframe  h-[200px] flex items-center justify-center "><div className='flex loader items-center h-[60px] justify-center '><LoaderCircle size={60} ></LoaderCircle></div></div>
+      }>
+        <WorkByProjectidcontent />
+      </Suspense>
+        )
 }

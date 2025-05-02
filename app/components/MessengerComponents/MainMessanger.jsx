@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import useMessage from '../../store/useMessage'
 import useSocket from '../../store/useSocket'
-import { Loader, LoaderCircle, Plane, PlaneTakeoff, Search, Send } from 'lucide-react'
+import { LoaderCircle, Plane, PlaneTakeoff, Search, Send } from 'lucide-react'
 import './messenger.css'
 
-const MainMessanger = () =>  {
+const MainMessangerContent = () =>  {
 
 
 
@@ -200,12 +200,13 @@ return <div key={id} className="mymessage sendbyme flex items-center justify-sta
 }
 
 
-return (
-<Suspense fallback={
-  <div className='flex items-center justify-center h-[100vh]'>
-    <LoaderCircle size={60} />
-  </div>
+
+export default function MainMessanger() {
+  return (<Suspense fallback={
+    <div className="loaderframe  h-[200px] flex items-center justify-center "><div className='flex loader items-center h-[60px] justify-center '><LoaderCircle size={60} ></LoaderCircle></div></div>
 }>
-  <MainMessanger />
+  <MainMessangerContent />
 </Suspense>
-)
+  )
+}
+

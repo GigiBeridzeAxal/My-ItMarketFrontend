@@ -1,11 +1,11 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import useMyJobPosts from '../../store/useMyJobPosts'
-import { Star, Ticket, Timer } from 'lucide-react'
+import { Loader, LoaderCircle, Star, Ticket, Timer } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 
-export default function JobList() {
+const JobListContent = () => {
 
     
         const {myjobpostsdata , myjobpostsloaded , getjobpostsdata , getjobinfo , projectisready , jobinfo , lastprojectid} = useMyJobPosts()
@@ -124,3 +124,16 @@ return <div className='flex items-start gap-[15px] mt-[20px] w-[70%]' key={id}>
 
  
 }
+
+
+
+export default function JobList() {
+  return (<Suspense fallback={
+<div className="loaderframe  h-[200px] flex items-center justify-center "><div className='flex loader items-center h-[60px] justify-center '><LoaderCircle size={60} ></LoaderCircle></div></div>
+  }>
+    <JobListContent />
+  </Suspense>
+    )
+}
+
+
