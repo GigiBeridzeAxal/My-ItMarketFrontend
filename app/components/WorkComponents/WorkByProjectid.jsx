@@ -1,6 +1,6 @@
 
 import { useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import useProjects from '../../store/useProjects'
 import { CreditCard, DollarSign, IdCard, LoaderCircle, Mail, Star, Timer } from 'lucide-react'
 import useAuth from '../../store/useAuth'

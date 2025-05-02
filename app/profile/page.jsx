@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import useAuth from '../store/useAuth'
 import Header from '../components/Header'
 import { useSearchParams } from 'next/navigation'
