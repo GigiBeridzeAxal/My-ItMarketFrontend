@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import Header from '../Header'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
@@ -8,7 +8,7 @@ import useSocket from '../../store/useSocket'
 import { Loader, LoaderCircle, Plane, PlaneTakeoff, Search, Send } from 'lucide-react'
 import './messenger.css'
 
-export default function MainMessanger() {
+const MainMessanger = () =>  {
 
 
 
@@ -198,3 +198,14 @@ return <div key={id} className="mymessage sendbyme flex items-center justify-sta
   </>
   )
 }
+
+
+return (
+<Suspense fallback={
+  <div className='flex items-center justify-center h-[100vh]'>
+    <LoaderCircle size={60} />
+  </div>
+}>
+  <MainMessanger />
+</Suspense>
+)
