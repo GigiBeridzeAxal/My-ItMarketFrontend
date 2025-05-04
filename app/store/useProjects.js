@@ -77,7 +77,7 @@ const useProjects = create((set,get) => ({
 
         if(!projectid) {set({projectnotfound:true})}
 
-        const getproject = await axios.post(process.env.NEXT_PUBLIC_BACKEND + 'projects/getprojectdetailsbyid' , {projectid:projectid})
+        const getproject = await axios.post(process.env.NEXT_PUBLIC_BACKEND + 'projects/getprojectdetailsbyid' , {projectid:projectid} , {withCredentials:true})
 
         if(getproject.status == 200){
             set({projectdetails:getproject.data.projectinfo , clientinfo:getproject.data.clientinfo})

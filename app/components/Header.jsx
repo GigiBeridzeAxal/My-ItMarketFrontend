@@ -5,17 +5,20 @@ import React, { useEffect, useState } from 'react'
 import useSocket from '../store/useSocket'
 import Link from 'next/link'
 import useAuth from '../store/useAuth'
-import { Bell, CreditCard, Edit, Folder, IdCard, LogOut, MessageCircle, MessageSquare, MessageSquareCode, MessageSquareDashed, MessageSquareDiff, MessageSquareLock, MessageSquareWarning, MessagesSquare, User, User2, User2Icon, UserCheck, UserCircle, Verified } from 'lucide-react'
+import { Bell, CreditCard, Edit, Folder, FolderArchive, FolderCode, IdCard, LogOut, MessageCircle, MessageSquare, MessageSquareCode, MessageSquareDashed, MessageSquareDiff, MessageSquareLock, MessageSquareWarning, MessagesSquare, User, User2, User2Icon, UserCheck, UserCircle, Verified } from 'lucide-react'
 import axios from 'axios'
 import { usePathname } from 'next/navigation'
 
 
 export default function Header() {
 
-  const {connecttoserver , logsocketactivity , socket} = useSocket()
+  const {connecttoserver , logsocketactivity , socket , Newprojects , lastprojectlength , setlastprojectlength} = useSocket()
   const {isUserLogin , checkuserlogin , userdata} = useAuth()
   const [profilemenu , setprofilemenu] = useState(false)
   const [messangernotif , setmessangernotif] = useState(false)
+  const [newprojectsnotif  , setnewprojectsnotif] = useState(false)
+
+
 
   const path = usePathname()
 
@@ -77,7 +80,7 @@ export default function Header() {
             
         </div>
 
-        <div className="right flex items-center gap-[30px]">
+        <div  className="right flex items-center gap-[30px]">
 
 
         {isUserLogin == true ?
@@ -87,6 +90,46 @@ export default function Header() {
            <div className="messagebox flex items-center justify-center gap-[20px]">
             
           <Link href={'/Message'}> <MessageSquare   className='size-[30px] '></MessageSquare></Link>
+
+          <div onMouseEnter={() => setnewprojectsnotif(true) | setlastprojectlength(Newprojects?.length) } onMouseLeave={() => setnewprojectsnotif(false)} className='relative'>
+           {lastprojectlength - Newprojects?.length !== 0 ? <div className="newprojectamount absolute bg-red-500 rounded-[50%] w-[18px] h-[18px] flex items-center justify-center text-white right-[-5px] bottom-[15px]">{Newprojects?.length - lastprojectlength}</div> : null} 
+            <Folder  className='size-[30px]'></Folder>
+
+            {newprojectsnotif ?   <>
+                <div className="absolute z-[15] right-[0px] flex p-[10px] flex-col justify-between align-center  w-[350px]  h-[450px]  rounded-[5px]"> </div>
+
+<div className="absolute z-[15] scrollable flex overflow-hidden overflow-y-auto  right-[0px] flex-col  align-center top-[55px] w-[300px] h-[400px] border-1 shadow bg-gray-100 rounded-[5px]">
+
+ <div className="lastmsg flex items-center justify-center p-[10px]"> Project Notifications</div>
+
+ {Newprojects.length > 0 ? Newprojects.slice().reverse().map((project , id) => 
+ {return <div key={id} className="projectnotif">
+
+  <Link href={`/projects?projectid=${project.id}`} className="flex items-center justify-start gap-[10px] p-[10px] hover:bg-gray-200 cursor-pointer">
+    <FolderCode className="projectimg w-[35px] h-[35px] mr-[20px] text-blue-400 rounded-[5px]"></FolderCode>
+    <div className="projectdetails flex flex-col justify-start items-start">
+      <h1 className='text-[15px] font-[600]'>{project.projectittle}</h1>
+      <p className='max-w-[320px] overflow-hidden h-[24px]'>{project.projecttags?.map((data,id) =>  {
+        return <span key={id} className='text-[12px] text-gray-500'>{data} </span>
+      })}</p>
+      <div className="projectprice text-[14px] ">USD {project.projectprice} <span className=''>$</span> </div>
+    </div>
+  </Link>
+
+ </div>
+
+
+ }) : <div className="lastmsg flex items-center justify-center p-[10px]">No New Projects</div>}
+
+  
+
+
+</div>
+        
+        </> : null}
+          
+          </div>
+        
        
            <div onMouseEnter={() => setmessangernotif(true)} onMouseLeave={() => setmessangernotif(false)} className="messangerheader relative">
            <Bell className='size-[30px] '></Bell>

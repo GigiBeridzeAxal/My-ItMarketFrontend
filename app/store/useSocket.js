@@ -9,8 +9,14 @@ import { use } from 'react'
 const useSocket = create((set,get) => ({
 
     Newprojects:[],
+    lastprojectlength:0,
     socket:null,
     onlineusers:[],
+
+    
+    setlastprojectlength:(length) => {
+        set({lastprojectlength:length})
+    },
 
 
 
@@ -42,7 +48,14 @@ const useSocket = create((set,get) => ({
             set({onlineusers:Object.keys(users)})
           
          })
-    socket.off('SendMessage')
+
+       socket.off("NewProjectAdded")
+        socket.on("NewProjectAdded" , (project) => {
+            console.log(project , "New Project")
+            set({Newprojects:[...get().Newprojects , project]})
+        })
+
+        socket.off('SendMessage')
          socket.on("SendMessage" , (message) => {
 
             console.log(message)

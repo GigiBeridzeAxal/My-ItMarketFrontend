@@ -107,7 +107,7 @@ return <div className='flex items-start gap-[15px] mt-[20px] w-[70%]' key={id}>
                      <div className="jobname flex justify-end  w-[33%]">Hired</div>
          
             </div>
-            {myjobpostsloaded ?    myjobpostsdata.map((data,id) => (
+            {myjobpostsloaded ?    myjobpostsdata.reverse().map((data,id) => (
                  <Link href={`/MyJobPosts?projectid=${data.id}`} className='p-[15px] mt-[10px] cursor-pointer bg-gray-100 flex items-center justify-between w-[100%]' key={id} >
                      <div className="jobname flex justify-start w-[33%]">{data.projectittle.slice(0.40)}</div>
                      <div className="jobname flex justify-center w-[33%]">{data.projectprice} $</div>

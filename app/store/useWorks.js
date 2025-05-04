@@ -9,7 +9,7 @@ const useWorks = create((set,get) => ({
     getworks:async() => {
 
 
-        const getprojects = await axios.get(process.env.NEXT_PUBLIC_BACKEND + 'projects/getprojects')
+        const getprojects = await axios.get(process.env.NEXT_PUBLIC_BACKEND + 'projects/getprojects' , {withCredentials:true})
 
 
         set({works:getprojects.data})

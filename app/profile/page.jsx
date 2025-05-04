@@ -54,6 +54,8 @@ const PageContent = () => {
         <div className="mainframe w-[80%]">
              <Header></Header>
 
+
+
              <div className="profile">
         <div className="profileframe flex flex-col items-center">
 
@@ -105,11 +107,14 @@ const PageContent = () => {
 
 
 export default function page() {
+
+  return (
   <Suspense fallback={
     <div className="loaderframe  h-[200px] flex items-center justify-center "><div className='flex loader items-center h-[60px] justify-center '><LoaderCircle size={60} ></LoaderCircle></div></div>
       }>
         <PageContent />
 
         </Suspense>
+  )
 
 }
