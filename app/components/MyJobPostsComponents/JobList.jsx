@@ -4,11 +4,13 @@ import useMyJobPosts from '../../store/useMyJobPosts'
 import { Loader, LoaderCircle, Star, Ticket, Timer } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
+import Loading from '../Loading'
+import PreLoader from '../MessengerComponents/PreLoader'
 
 const JobListContent = () => {
 
     
-        const {myjobpostsdata , myjobpostsloaded , getjobpostsdata , getjobinfo , projectisready , jobinfo , lastprojectid} = useMyJobPosts()
+        const {myjobpostsdata , myjobpostsloaded , getjobpostsdata , getjobinfo , projectisready , jobinfo , lastprojectid , jobinfoloading} = useMyJobPosts()
 
         const searchparams = useSearchParams()
 
@@ -50,6 +52,8 @@ const JobListContent = () => {
             <div className="jobproposals mt-[30px] p-[20px]">
 
               <span className=''>Total Proposals: {jobinfo?.length}</span>
+
+              {jobinfo?.length == 0 ? <div className='flex items-center justify-center mt-[20px]'>No Proposals Yet</div> : null}
 
 {jobinfo?.map((data,id) => {
 
@@ -100,13 +104,18 @@ return <div className='flex items-start gap-[15px] mt-[20px] w-[70%]' key={id}>
           return (
             <div className="joblist p-[20px] ">
              <div className="joblistframe">
+
+          
          
             <div className="joblistinfo p-[10px] flex items-center justify-between">
+
             <div className="jobname flex justify-start w-[33%]">Project Name</div>
                      <div className="jobname flex justify-center w-[33%]">Project Price</div>
                      <div className="jobname flex justify-end  w-[33%]">Hired</div>
          
             </div>
+
+            {!myjobpostsloaded ? <PreLoader preloaderlocat={'Messanger'}></PreLoader> : null}
             {myjobpostsloaded ?    myjobpostsdata.reverse().map((data,id) => (
                  <Link href={`/MyJobPosts?projectid=${data.id}`} className='p-[15px] mt-[10px] cursor-pointer bg-gray-100 flex items-center justify-between w-[100%]' key={id} >
                      <div className="jobname flex justify-start w-[33%]">{data.projectittle.slice(0.40)}</div>

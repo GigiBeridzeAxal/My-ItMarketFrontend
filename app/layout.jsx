@@ -3,6 +3,8 @@ import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import Botlogo from "./components/chatbotcomponents/Botlogo";
 
+
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -25,7 +27,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="alert bg-red-300/50 p-[1px] text-[10px] flex items-center justify-center w-[100%]">Website Working On Free Plans </div>
+     
         {children}
         <Botlogo></Botlogo>
         <ToastContainer />

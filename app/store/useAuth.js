@@ -13,6 +13,7 @@ const useAuth = create((set , get) => ({
     editprofile:false,
     
     freelancersdata:[],
+    freelancerloading:true,
 
 
     
@@ -38,7 +39,29 @@ const useAuth = create((set , get) => ({
    },
 
    changeprofileiamge:async(image) => {
+
+    const loading = toast.loading("Changing Profile Image")
     
+    try{
+
+        const formdata = new FormData()
+        formdata.append('file' , image[0])
+
+
+        
+
+        const changeimage = await axios.post(process.env.NEXT_PUBLIC_BACKEND + 'User/changeprofileimage' , formdata , {withCredentials:true , headers:{'Content-Type':'multipart/form-data'}})
+        toast.dismiss(loading)
+        toast.success("Your Profile Image Changed")
+        set({profileview:{...get().userdata , profilepic:changeimage.data}})
+
+        
+    }catch(err){
+        toast.error(err.response.data)
+
+        toast.dismiss(loading)
+    }
+
    },
 
    edituser:async(param) => {
@@ -60,11 +83,11 @@ const useAuth = create((set , get) => ({
 
    getfreelancerusers:async() => {
 
+    set({freelancerloading:true})
 
     const getfreelancers = await axios.get(process.env.NEXT_PUBLIC_BACKEND + 'user/getallfreelancerusers')
 
-    
-    set({freelancersdata:getfreelancers.data})
+    set({freelancersdata:getfreelancers.data , freelancerloading:false})
 
 
 

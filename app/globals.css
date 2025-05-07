@@ -84,6 +84,79 @@ body {
   background: #abeeee;
 }
 
+.dotlist{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: max-content;
+  margin: auto;
+  animation: rotate linear 2s infinite;
+}
+
+.alldot{
+
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  animation: loading ease-in-out 2s infinite;
+
+}
+.preloader{
+  position: relative;
+  overflow: hidden;
+}
+.preloader::after{
+
+  content: '';
+
+  position: absolute;
+  display: flex;
+
+  height: 550px;
+  width: 0px;
+  left: 0px;
+  top: -50px !important;
+
+  transform: rotate(30deg);
+  background-color: rgb(255, 255, 255);
+
+  animation: 1.2s linear preloader infinite;
+  box-shadow: 0px 0px 73px 10px #ffffff !important;
+
+}
+
+@keyframes preloader {
+
+  0%{
+    left: -200px;
+  }
+  100%{
+    left: 100%;
+  }
+
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loading {
+
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.5) rotate(45deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+
+
+}
 
 @keyframes Loader {
 

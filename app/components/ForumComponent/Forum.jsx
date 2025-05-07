@@ -3,11 +3,14 @@ import React, { useEffect, useState } from 'react'
 import useAuth from '../../store/useAuth'
 import { Dot, DotSquare, Hand, Heart, LineChart, Plane, Settings, Upload, User2Icon } from 'lucide-react'
 import useForum from '../../store/useForum'
+import { img } from 'framer-motion/client'
+import Loading from '../Loading'
+import PreLoader from '../MessengerComponents/PreLoader'
 
 export default function Forum() {
 
     const {checkuserlogin , userdata , isUserLogin} = useAuth()
-    const {createforumpost , getforumdata , forumdata} = useForum()
+    const {createforumpost , getforumdata , forumdata , forumloading} = useForum()
     const [projectdesc , setprojectdesc] = useState()
     const [uploadedfiles , setuploadedfiles] = useState([])
     const [selectedimage , setselectedimage] = useState([])
@@ -115,6 +118,7 @@ export default function Forum() {
 : null}  
 
             <div className="forumposts mt-[20px] w-[70%] flex flex-col gap-[20px]">
+              {forumloading ? <PreLoader preloaderlocat="Forum" ></PreLoader>  : null}
             {  
 
 forumdata.map((data , id) => {
@@ -146,15 +150,15 @@ forumdata.map((data , id) => {
 
 <div className="firstline flex items-center  gap-[10px]"> <div className="profilepic">
           
-          {data.forumowner.profilepic == "noprofile" ?    <div  className="profile relative  p-[10px] text-center w-[50px] flex items-center justify-center rounded-[50%] h-[50px] bg-gray-200"><User2Icon></User2Icon> </div> : null}
+          {data.forumowner.profilepic == "noprofile" ?    <div  className="profile relative  p-[10px] text-center w-[50px] flex items-center justify-center rounded-[50%] h-[50px] bg-gray-200"><User2Icon></User2Icon> </div> :  <img className='w-[50px] min-w-[50px] h-[50px] rounded-[50%]' src={`https://itmarketbucket.s3.us-east-1.amazonaws.com/${data.forumowner.profilepic}`} alt="" />}
 
         </div> 
         
         <div className="name w-[100%] flex items-center justify-between ">{data.forumowner.username}  {timeAgo} </div>   <div className="dots flex items-center gap-[1px]"><Settings></Settings></div> </div>
     
-        <div className="description whitespace-pre-line p-[10px] ">{data.forumdesc}</div>
+        <div className="description whitespace-pre-line p-[10px] ">{data.forumdesc.length <= 0 ? data.forumdesc : null}</div>
 
-        <div className="files flex items-center gap-[10px] flex-wrap">{data?.forumfiles.length !== 0 ? data.forumfiles.map((data,id) => (
+        <div className="files flex items-center gap-[10px] flex-wrap">{data?.forumfiles?.length !== 0 ? data.forumfiles?.map((data,id) => (
            <div key={id} className='p-[10px] bg-gray-200/90 '> <img src={`https://itmarketbucket.s3.us-east-1.amazonaws.com/${data}`}  className='max-w-[800px] w-[420px] object-cover max-h-[400px]'></img></div>
         )) : null}</div>
 

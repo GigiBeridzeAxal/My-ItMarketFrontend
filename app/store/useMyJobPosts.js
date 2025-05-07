@@ -11,6 +11,7 @@ const useMyJobPosts = create((set,get) => ({
     jobinfo:null,
     projectisready:null,
     lastprojectid:null,
+    jobinfoloading:true,
 
 
 
@@ -37,8 +38,11 @@ const useMyJobPosts = create((set,get) => ({
             set({projectisready:true , jobinfo:getinfo.data , lastprojectid:projectid})
         }
 
+        set({jobinfoloading:false})
+
         
       }catch(err){
+        set({jobinfoloading:false})
 
         toast.error("You Dont Have Access")
 

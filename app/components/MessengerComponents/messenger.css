@@ -1,7 +1,3 @@
-
-.messageslist{
-    overflow-y: auto;
-    max-height: 95%;
-    min-height: 95%;
-  }
-
+body{
+  height: calc(100vh - 94.87px);
+}

@@ -172,7 +172,7 @@ export default function Header() {
          <div className="funds  text-gray-800 font-[600]">USD {userdata.Funds?.toFixed(2)} <span className='text-teal-600'>$</span> </div>
          </div>
         
-        <div onMouseEnter={() => setprofilemenu(true)} onMouseLeave={() => setprofilemenu(false)} className="profile relative  p-[10px] text-center w-[50px] flex items-center justify-center rounded-[50%] h-[50px] bg-gray-200"><User2Icon></User2Icon> 
+        <div onMouseEnter={() => setprofilemenu(true)} onMouseLeave={() => setprofilemenu(false)} className={`profile relative  p-[10px] text-center w-[50px] flex items-center justify-center   ${userdata.profilepic == 'noprofile' ?  'bg-gray-200 rounded-[50%]  h-[50px]' : ''}`}> {userdata.profilepic == "noprofile" ? <User2Icon></User2Icon> : <img className='w-[50px] min-w-[50px] h-[50px] rounded-[50%]' src={`https://itmarketbucket.s3.us-east-1.amazonaws.com/${userdata.profilepic}`} alt="" />} 
        
         {profilemenu ?
         <>

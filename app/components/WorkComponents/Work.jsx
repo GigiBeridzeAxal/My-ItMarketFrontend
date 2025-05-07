@@ -2,9 +2,10 @@ import React, { useEffect } from 'react'
 import useWorks from '../../store/useWorks'
 import { Heart } from 'lucide-react'
 import Link from 'next/link'
+import Loading from '../Loading'
 
 export default function Work() {
-    const {getworks , works} = useWorks()
+    const {getworks , works , workloading} = useWorks()
 
     useEffect(() => {
 
@@ -28,6 +29,7 @@ export default function Work() {
             <br />
 
             <div className="projects flex flex-col gap-[15px]">
+              {workloading && works[0] == undefined ? <Loading></Loading> : null}
                 {works ? 
 
                 works?.map((data , id) => {
